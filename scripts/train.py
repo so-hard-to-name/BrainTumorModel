@@ -31,7 +31,7 @@ def evaluate(model, loader, loss_fn, device):
                 probs = torch.sigmoid(seg_logits[has_mask])
                 preds = (probs > 0.5).float()
                 gt = mask[has_mask]
-                inter = (preds * gt).sum(dim(1, 2, 3))
+                inter = (preds * gt).sum(dim=(1, 2, 3))
                 union = preds.sum(dim=(1, 2, 3)) + gt.sum(dim=(1, 2, 3))
                 dice = (2 * inter + 1e-6) / (union + 1e-6)
                 dice_scores.extend(dice.tolist())
@@ -62,7 +62,7 @@ def main():
     val_loader  = DataLoader(val_ds, batch_size=8, shuffle=False, num_workers=2)
     test_loader = DataLoader(test_ds, batch_size=8, shuffle=False, num_workers=2)
 
-    epochs = 4
+    epochs = 40
     image_size = 512
     max_tokens = (image_size // 16) ** 2
 
