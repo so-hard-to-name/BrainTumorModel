@@ -105,7 +105,7 @@ def main():
                       f"dice={losses['seg_dice'].item():.4f})")
 
         scheduler.step()
-        val_loss, val_acc, val_dice = evaluate(model, test_loader, loss_fn, device)
+        val_loss, val_acc, val_dice = evaluate(model, val_loader, loss_fn, device)
         print(f"== epoch {epoch} done | train_loss={running_loss/len(train_loader):.4f} "
               f"| val_loss={val_loss:.4f} val_acc={val_acc:.4f} val_dice={val_dice:.4f}")
 
